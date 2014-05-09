@@ -40,3 +40,16 @@ def get_recommendations(prefs, person, sim = sim_pearson):
     rankings.sort() # Sort by key
     rankings.reverse()
     return rankings
+
+"""
+Flip item and person around in the prefs table.
+"""
+def transform_prefs(prefs):
+  result = {}
+  for person in prefs:
+    for item in prefs[person]:
+      result.setdefault(item, {})
+
+      # Flip item and person
+      result[item][person] = prefs[person][item]
+  return result
